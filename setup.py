@@ -1,23 +1,24 @@
-import os
-import sys
 from setuptools import setup, find_packages
 
+vendor_version = "rentals.0"
+version_prefix = "0.2.2"
 
-def get_version(filename):
-    import os
-    import re
+def get_version():
+    import subprocess
+    commit_hash = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode("utf8").strip()[:12]
+    label = subprocess.check_output(["git", "describe"]).decode("utf8").strip()
+    last_tag = subprocess.check_output(["git", "describe", "--abbrev=0"]).decode("utf8").strip()
+    
+    version = version_prefix + "." + vendor_version
+    if last_tag != label:
+        version += "+git." + commit_hash
 
-    here = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(here, filename)) as f:
-        version_file = f.read()
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
+    return version
 
 
-version = get_version('aiodataloader.py')
+version = get_version()
+print(version)
+import sys; sys.exit()
 
 tests_require = [
     'pytest>=3.6', 'pytest-cov', 'coveralls', 'mock', 'pytest-asyncio'

@@ -2,11 +2,12 @@ from asyncio import gather, ensure_future, get_event_loop, iscoroutine, iscorout
 from collections import namedtuple
 from collections.abc import Iterable
 from functools import partial
+import pkg_resources
 
 from typing import List  # flake8: noqa
 
+__version__ = pkg_resources.get_distribution(__file__).version
 
-__version__ = '0.2.0'
 
 Loader = namedtuple('Loader', 'key,future')
 
