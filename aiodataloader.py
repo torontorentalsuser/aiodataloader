@@ -6,7 +6,10 @@ import pkg_resources
 
 from typing import List  # flake8: noqa
 
-__version__ = pkg_resources.get_distribution(__file__).version
+try:
+    __version__ = pkg_resources.get_distribution(__file__).version
+except Exception:
+    __version__ = "0.0.dev0"
 
 
 Loader = namedtuple('Loader', 'key,future')

@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 vendor_version = "rentals.0"
 version_prefix = "0.2.2"
@@ -17,8 +17,6 @@ def get_version():
 
 
 version = get_version()
-print(version)
-import sys; sys.exit()
 
 tests_require = [
     'pytest>=3.6', 'pytest-cov', 'coveralls', 'mock', 'pytest-asyncio'
