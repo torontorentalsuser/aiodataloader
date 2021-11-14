@@ -1,7 +1,7 @@
 from setuptools import setup
 
 vendor_version = "rentals.0"
-version_prefix = "0.2.2"
+version_prefix = "0.2.1"
 
 def get_version():
     import subprocess
@@ -9,7 +9,7 @@ def get_version():
     label = subprocess.check_output(["git", "describe"]).decode("utf8").strip()
     last_tag = subprocess.check_output(["git", "describe", "--abbrev=0"]).decode("utf8").strip()
     
-    version = version_prefix + "." + vendor_version
+    version = version_prefix + "+" + vendor_version
     if last_tag != label:
         version += "+git." + commit_hash
 
